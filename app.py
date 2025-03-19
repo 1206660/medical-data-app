@@ -109,7 +109,8 @@ def generate_plot(data):
 
             # 突出标记重要信息
             for xi, mark in zip(x_index, important_marks_subset):
-                if pd.notna(mark):
+                #if pd.notna(mark):
+                if mark != None:
                     y_val = y_subset.iloc[xi]
                     plt.annotate(mark,
                                  xy=(xi, y_val + 5),
