@@ -87,23 +87,18 @@
             {% for row in data.病情及肿瘤标志物监测表 %}
             <tr>
                 {% for value in row.values() %}
-                <td>{{ value if value is not none else '/' }}</td>
+                <td>{{ value }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <h2>肿瘤标志物随时间变化曲线</h2>
-    {% for plot_url in plot_urls %}
-    <img src="data:image/png;base64,{{ plot_url }}" alt="肿瘤标志物曲线">
+    <button onclick="window.location.href='/download_all_images'">下载所有图片</button>
+    {% for plot_url, filename in zipped_data %}
+    <img src="data:image/png;base64,{{ plot_url }}" alt="{{ filename }}">
     {% endfor %}
-    <a href="{{ url_for('add_data') }}">新增数据</a>
-    <button onclick="downloadAllImages()">一键下载所有图片</button>
-    <script>
-        function downloadAllImages() {
-            window.location.href = '/download_all_images';
-        }
-    </script>
+    <a href="{{ url_for('add_data') }}">添加新数据</a>
 </body>
 
 </html>
